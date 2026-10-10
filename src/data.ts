@@ -18,22 +18,25 @@ export const user: User = {
         { name: 'Databases', grade: 4.0, weight: 2 },
         { name: 'Physical Education', grade: 5.0, weight: 1 },
     ],
-    printSummary: function (): string{
-       let res = this.subjects.reduce((accumulator, currentValue)=> {
-            accumulator.prod += currentValue.grade*currentValue.weight;
-            accumulator.sumWeight += currentValue.weight;
-            return accumulator
-        }, {"prod":0, "sumWeight":0});
-
-        return `${this.firstName} ${this.lastName} - weighted average: ${(res.prod/res.sumWeight).toFixed(2)}`
-    },
-    findSubjectByWeight: function(weight: number): string {
-        let sub = user.subjects.find((sub) => sub.weight === weight);
-        if (sub === undefined) {
-            return "Cannot read properties of undefined";
-
-        }
-        return sub.name;
-    }
+    printSummary: printSummary,
+    findSubjectByWeight: findSubjectByWeight
 
 };
+export function printSummary(this: User): string{
+    let res = this.subjects.reduce((accumulator, currentValue)=> {
+        accumulator.prod += currentValue.grade*currentValue.weight;
+        accumulator.sumWeight += currentValue.weight;
+        return accumulator
+    }, {"prod":0, "sumWeight":0});
+
+    return `${this.firstName} ${this.lastName} - weighted average: ${(res.prod/res.sumWeight).toFixed(2)}`
+}
+
+export function findSubjectByWeight(this: User, weight: number): string {
+    let sub = user.subjects.find((sub) => sub.weight === weight);
+    if (sub === undefined) {
+        return "Cannot read properties of undefined";
+
+    }
+    return sub.name;
+}

@@ -1,3 +1,5 @@
+import find from "lodash/find.js"
+
 export type Subject = {
     name: string;
     grade: number;
@@ -27,12 +29,13 @@ export const user: User = {
 
         return `${this.firstName} ${this.lastName} - weighted average: ${(res.prod/res.sumWeight).toFixed(2)}`
     },
-    findSubjectByWeight: function(weight: number): string {
-        let sub = user.subjects.find((sub) => sub.weight === weight);
-        if (sub === undefined) {
-            return "Cannot read properties of undefined";
+    findSubjectByWeight: function (weight: number): string {
+        const sub = find(this.subjects, (sub) => sub.weight === weight);
 
+        if (sub === undefined) {
+            return 'Subject not found';
         }
+
         return sub.name;
     }
 

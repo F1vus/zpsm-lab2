@@ -20,7 +20,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.26",
     "@types/node": "^26.6.5",
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.18.1"
   }
 }

@@ -7,7 +7,8 @@ export type User = {
     firstName: string;
     lastName: string;
     subjects: Subject[];
-    printSummary: Function
+    printSummary: ()=>string;
+    findSubjectByWeight: (weight: number)=>string;
 };
 export const user: User = {
     firstName: 'Anna',
@@ -25,5 +26,14 @@ export const user: User = {
         }, {"prod":0, "sumWeight":0});
 
         return `${this.firstName} ${this.lastName} - weighted average: ${(res.prod/res.sumWeight).toFixed(2)}`
+    },
+    findSubjectByWeight: function(weight: number): string {
+        let sub = user.subjects.find((sub) => sub.weight === weight);
+        if (sub === undefined) {
+            return "Cannot read properties of undefined";
+
+        }
+        return sub.name;
     }
+
 };

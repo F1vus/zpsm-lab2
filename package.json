@@ -1,0 +1,26 @@
+{
+  "name": "zpsm-lab2",
+  "version": "0.0.1",
+  "description": "",
+  "homepage": "https://github.com/F1vus/zpsm-lab2#readme",
+  "bugs": {
+    "url": "https://github.com/F1vus/zpsm-lab2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/F1vus/zpsm-lab2.git"
+  },
+  "license": "ISC",
+  "author": "F1v",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.ts",
+    "check": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}

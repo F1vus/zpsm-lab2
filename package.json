@@ -13,9 +13,9 @@
   "license": "ISC",
   "author": "F1v",
   "type": "module",
-  "main": "index.js",
+  "main": "src/apps.ts",
   "scripts": {
-    "start": "node src/app.ts",
+    "start": "node src/apps.ts",
     "check": "tsc --noEmit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

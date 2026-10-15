@@ -22,21 +22,20 @@ export const user: User = {
     findSubjectByWeight: findSubjectByWeight
 
 };
-export function printSummary(this: User): string{
-    let res = this.subjects.reduce((accumulator, currentValue)=> {
-        accumulator.prod += currentValue.grade*currentValue.weight;
-        accumulator.sumWeight += currentValue.weight;
-        return accumulator
-    }, {"prod":0, "sumWeight":0});
+export function average(user: Pick<User, 'subjects'>): number {
+    const sumWeight = user.subjects.reduce((sum, s) => sum + s.weight, 0);
+    if (sumWeight === 0) return 0;
+    return user.subjects.reduce((sum, s) => sum + s.grade * s.weight, 0) / sumWeight;
+}
 
-    return `${this.firstName} ${this.lastName} - weighted average: ${(res.prod/res.sumWeight).toFixed(2)}`
+export function printSummary(this: User): string {
+    return `${this.firstName} ${this.lastName} - weighted average: ${average(this).toFixed(2)}`;
 }
 
 export function findSubjectByWeight(this: User, weight: number): string {
-    let sub = user.subjects.find((sub) => sub.weight === weight);
+    const sub = this.subjects.find((s) => s.weight === weight);
     if (sub === undefined) {
-        return "Cannot read properties of undefined";
-
+        return `Subject with weight "${weight}" doesn't exist!`;
     }
     return sub.name;
 }

@@ -1,7 +1,7 @@
 import {type User, user} from "./data.ts";
 import {getMails} from "./mails.ts";
 import {save, load} from "./storage.ts";
-import {toUser} from "./validate.ts";
+import {toUsers} from "./validate.ts";
 
 console.log(user.printSummary());
 console.log(user.findSubjectByWeight(7));
@@ -22,10 +22,12 @@ const collections: unknown[] = [
 console.log(getMails(collections))
 
 
-//save(user, "./data.json");
+//save([user], "./data.json");
 
-let loadedUser: User = toUser(load("./data.json"));
 
-console.log(loadedUser.printSummary());
-console.log(user.findSubjectByWeight(1));
+const users: User[] = toUsers(load("./data.json"));
+
+users.forEach((u, index)=>console.log(`#${index+1}: ${u.printSummary()}`))
+
+console.log(`Subject has been found by weight: ${user.findSubjectByWeight(1)}`);
 

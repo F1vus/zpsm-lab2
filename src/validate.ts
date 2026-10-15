@@ -1,5 +1,5 @@
 import type { User, Subject} from './data.ts';
-import {printSummary, findSubjectByWeight} from "./data.ts";
+import {printSummary, findSubjectByWeight, average} from "./data.ts";
 
 export function toUser(input: unknown): User {
     // 1. is it an object at all, and not null?
@@ -53,4 +53,13 @@ function isSubject(input: unknown): input is Subject {
         typeof obj.grade === 'number' &&
         typeof obj.weight === 'number'
     );
+}
+
+export function toUsers(input: unknown): User[] {
+    if (!Array.isArray(input)) {
+        throw new Error("Input must be an array of users");
+    }
+    let users: User[] = input.map(toUser);
+
+    return users.toSorted((a, b) => average(b) - average(a));
 }
